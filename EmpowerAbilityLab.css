@@ -1,9 +1,13 @@
 .site-header {
-  background-color: #f8f6f1; /* off-white */
+  background-color: #f7f7f4; /* off-white */
 }
 
 .site-header .nav-link {
   color: #2b2b2b;
+}
+
+.site-header .navbar-nav {
+  gap: 1rem;
 }
 
 .site-header .nav-link:hover {
@@ -12,6 +16,7 @@
 
 body {
   padding-top: 70px;
+  font-family: "Lato", sans-serif;
 }
 
 .navbar {
@@ -33,4 +38,24 @@ body {
   width: auto;
   display: block;
   object-fit: contain;
+}
+
+/* Desktop: force nav to exact center of header */
+@media (min-width: 768px) {
+  .site-header .container-fluid {
+    position: relative;
+  }
+
+  .site-header .nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    display: flex !important;
+    justify-content: center;
+  }
+
+  .site-header .navbar-nav {
+    flex-direction: row;
+  }
 }
