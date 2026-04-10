@@ -18,8 +18,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Custom styles for Empower Ability Labs -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link rel="stylesheet" href="EmpowerAbilityLab.css">
-
 </head>
 
 <body>
@@ -49,63 +49,7 @@
   </header>
 
   </div>
-  <main>
-    <!-- Main landing view -->
-    <div class="jumbotron">
-      <div class="container">
-        <!-- MIGHT WANT TO HAVE THE BODY BE A LIVE REGION SO WHEN IT IS UPDATED THEN THE SCREEN READEAR WILL BEGIN SAYING THAT THE CONTENT HAS BEEN UPDATED -->
-         <!-- https://dequeuniversity.com/assets/html/module-dynamic/singlepage/good-angular/index.html#/home <-- PROVIDES GOOD INFORMATION-->
-        <h1 class="h2" tabindex="-1">Welcome to Empower Ability Labs!</h1>
-        <p>Empower Ability Labs is a hub for learning and empathy-building. We are on a mission to foster understanding
-          and promote inclusive digital experiences for all. We offer a range of services designed to promote
-          accessibility awareness, drive inclusivity, and enhance the user experience. And help you find answers on How
-          do people with disabilities use technology and navigate the digital world? What tools do they employ? </p>
-      </div>
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <article>
-            <h2> Our Approach</h2>
-            <p>
-              Empower Ability Labs utilizes a hands-on approach to raise awareness and promote empathy. Our immersive
-              workshops and lab days provide participants with a unique opportunity to step into the shoes of
-              individuals with disabilities and navigate the
-            </p>
-            <a href="https://www.google.com/search/howsearchworks/our-approach/">Learn more</a>
-          </article>
-
-        </div>
-        <div class="col-md-4">
-          <article>
-            <h2>Services</h2>
-            <p>
-              Promote accessibility awareness and enhance the user experience.
-            </p>
-            <ul>
-              <li>Empathy lab days and workshops</li>
-              <li>Go beyond WCAG compliance!</li>
-              <li>Inspirational speakers</li>
-            </ul>
-            <a href="https://www.elevenways.be/en/services">Learn more</a>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <artilce>
-            <h2>Testimonial</h2>
-            <p>Invite a speaker with disabilities to share their unique journey. This captivating addition to your
-              upcoming event will offer insights that resonate, inspire, educate, and enrich your team’s understanding
-              of inclusion.</p>
-            <a href="https://dictionary.cambridge.org/us/dictionary/english/testimonial">Learn more</a>
-          </artilce>
-        </div>
-      </div>
-
-      <hr>
-
-    </div> <!-- /container -->
+  <main id="main-content">
 
   </main>
 
@@ -117,7 +61,127 @@
 
   <script src="EmpowerAbilityLab.js"></script>
 
+  <template id="main">
+    <div id="inner-content">
+
+
+      <!-- Main landing view -->
+      <div class="jumbotron">
+        <div class="container">
+          <!-- MIGHT WANT TO HAVE THE BODY BE A LIVE REGION SO WHEN IT IS UPDATED THEN THE SCREEN READEAR WILL BEGIN SAYING THAT THE CONTENT HAS BEEN UPDATED -->
+          <!-- https://dequeuniversity.com/assets/html/module-dynamic/singlepage/good-angular/index.html#/home <-- PROVIDES GOOD INFORMATION-->
+          <h1 class="h2" tabindex="-1">Welcome to Empower Ability Labs!</h1>
+          <p>Empower Ability Labs is a hub for learning and empathy-building. We are on a mission to foster
+            understanding
+            and promote inclusive digital experiences for all. We offer a range of services designed to promote
+            accessibility awareness, drive inclusivity, and enhance the user experience. And help you find answers on
+            How
+            do people with disabilities use technology and navigate the digital world? What tools do they employ? </p>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <article>
+              <h2> Our Approach</h2>
+              <p>
+                Empower Ability Labs utilizes a hands-on approach to raise awareness and promote empathy. Our immersive
+                workshops and lab days provide participants with a unique opportunity to step into the shoes of
+                individuals with disabilities and navigate the
+              </p>
+              <a href="https://www.google.com/search/howsearchworks/our-approach/">Learn more</a>
+            </article>
+
+          </div>
+          <div class="col-md-4">
+            <article>
+              <h2>Services</h2>
+              <p>
+                Promote accessibility awareness and enhance the user experience.
+              </p>
+              <ul>
+                <li>Empathy lab days and workshops</li>
+                <li>Go beyond WCAG compliance!</li>
+                <li>Inspirational speakers</li>
+              </ul>
+              <a href="https://www.elevenways.be/en/services">Learn more</a>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <artilce>
+              <h2>Testimonial</h2>
+              <p>Invite a speaker with disabilities to share their unique journey. This captivating addition to your
+                upcoming event will offer insights that resonate, inspire, educate, and enrich your team’s understanding
+                of inclusion.</p>
+              <a href="https://dictionary.cambridge.org/us/dictionary/english/testimonial">Learn more</a>
+            </artilce>
+          </div>
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+    </div>
+  </template>
+  <template id="service-template">
+    <div>
+      <div class="jumbotron">
+        <div class="container">
+          <!--- UNKNOWN WHAT THE ACTUAL h1 IS AND THIS NEEDS TO BE FORMATED -->
+          <h1 class="h2">Services</h1>
+          <p>
+            Dedicated space or programs designed to cultivate empathy and understanding among individuals
+            towards
+            the challenges faced by people with disabilities in using technology and interacting with various
+            environments.
+          </p>
+          <!-- IMAGE NEEDS TO BE FORMATTED SO TEXT AND IMAGE IN SAME LINE -->
+          <!-- NEEDS TO DOUBLE CHECK IMAGE TYPE-->
+          <img src="./images/services.png" alt="">
+        </div>
+      </div>
+      <div class="container">
+        <h1 class="h2">Empathy Lab days and workshops</h1>
+        <p>
+          The lab days and workshops typically provide hands-on experiences, simulations, and interactions
+          with
+          assistive technologies, tools, and scenarios that replicate the obstacles individuals with
+          disabilities
+          encounter daily.
+        </p>
+      </div>
+      <div class="container">
+        <article>
+          <h2>Inspirational Speakers</h2>
+          <p>
+            Invite a speaker with disabilities to take share their unique journey. This captivating addition to
+            your
+            upcoming event will offer insights that resonate, inspire, educate, and enrich your team collective
+            understanding of inclusion.
+          </p>
+        </article>
+        <article>
+          <h2>Usability Testing</h2>
+          <p>
+            Go beyond WCAG! Involve individuals with disabilities in usability testing to gather valuable
+            insights for
+            refining product strategy and identifying accessibility concerns at an early stage when solutions
+            are more
+            feasible and cost-effective. You have access to a diverse community of people with disabilities, who
+            use
+            various assistive technologies. With technical expertise ranging from novice to expert, our
+            community can
+            support your product lifecycle from user research, to design, to QA.
+          </p>
+        </article>
+      </div>
+    </div>
+  </template>
+
 
 </body>
+
 
 </html>
