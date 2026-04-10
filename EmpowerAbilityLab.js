@@ -33,9 +33,8 @@ function knowledgeRunner() {
         e.preventDefault();
         clearPage();
         loadPage();
-        const heading = document.getElementsByTagName("h1")
-        console.log(heading)
-        heading.focus()
+        let heading = document.getElementsByTagName("h1")[0];
+        heading.focus();
     });
 
     loadStart();
