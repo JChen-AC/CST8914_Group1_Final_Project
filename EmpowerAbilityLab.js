@@ -9,9 +9,10 @@ function knowledgeRunner() {
         main.removeChild(main.firstElementChild);
     }
 
-    function loadPage() {
+    function loadPage(page_id) {
         console.log("Loading New content")
-        let template = document.getElementById("service-template");
+        console.log(page_id)
+        let template = document.getElementById(page_id);
         let main = document.getElementById("main-content");
         console.log(template)
 
@@ -43,45 +44,49 @@ function knowledgeRunner() {
 
     function get_page_detail(e) {
         console.log(e)
+        let page_data;
         if (e.target.text == "Home") {
             console.log("Link clicked is home")
-            const page_data = {
+            page_data = {
                 title:"Empower Ability Labs",
                 url:"home",
-                id:"main-template"
+                template_id:"main-template"
             };
 
         }
         else if (e.target.text == "Services") {
             console.log("link clicked is services")
-            const page_data = {
+            page_data = {
                 title:"Services - Empower Ability Labs",
                 url:"services",
-                id:"services-template"
+                template_id:"service-template"
             };
 
         }
         else if (e.target.text == "Schedule a call") {
             console.log("link clicked is Schedule a call")
-            const page_data = {
+            page_data = {
                 title:"Scehdule a call - Empower Ability Labs",
                 url:"schedule",
-                id:"schedule-template"
+                template_id:"schedule-template"
             };
         }
+        return page_data
     }
 
     $(document).on('click', 'a.nav-link', function (e) {
-        console.log(e);
-        console.log(e.target.text);
-        console.log(window.location.href)
-        get_page_detail(e);
+        //console.log(e);
+        //console.log(e.target.text);
+        //console.log(window.location.href)
+        let page_details = get_page_detail(e);
+        console.log("Page details")
+        console.log(page_details)
 
         e.preventDefault();
         console.log("Getting page details")
         //console.log(e.target.text);
         clearPage();
-        loadPage();
+        loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
     });
