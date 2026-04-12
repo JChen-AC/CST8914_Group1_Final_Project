@@ -26,26 +26,53 @@ function knowledgeRunner() {
         console.log(start_template)
         console.log("main: ")
         console.log(main)
+        let home_data = get_page_detail("Home");
+        console.log("home_data");
+        console.log(home_data);
+        let base_url = window.location.href;
+        console.log("base");
+        console.log(base_url);
+        let route = `${base_url}/${home_data.url}`;
+        console.log("Route");
+        console.log(route);
+        updateHistory(route,home_data.title);
 
         main.appendChild(start_template.content.cloneNode(true))
     }
 
-    function updateHistory() {
-        let newURL = "";
-        let newTitle = "";
-        history.pushState({ url: newURL, title: newTitle }, newURL, newTitle);
+    function updateHistory(newURL,newTitle) {   
+        console.log("Updating history");
+        history.pushState({ url: newURL, title: newTitle }, newTitle, newURL);
     };
     function updateTitle() {
 
     };
-    function updateURL() {
 
+    function get_route(base){
+
+    }
+
+    function updateURL(route,title) {
+        let base = window.location.href;
+        let newURL = base;
+        if(base.includes("home")){
+            newURL = base.replace("home",route)
+        }
+        else if(base.includes("services")){
+            newURL = base.replace("service",route)
+        }
+        else if(base.includes("schedule")){
+            newURL = base.replace("schedule",route)
+        }
+        console.log(newURL)
+        updateHistory(newURL,title)
     };
 
-    function get_page_detail(e) {
-        console.log(e)
+
+    function get_page_detail(route) {
+        console.log(route)
         let page_data;
-        if (e.target.text == "Home") {
+        if (route == "Home") {
             console.log("Link clicked is home")
             page_data = {
                 title:"Empower Ability Labs",
@@ -54,7 +81,7 @@ function knowledgeRunner() {
             };
 
         }
-        else if (e.target.text == "Services") {
+        else if (route == "Services") {
             console.log("link clicked is services")
             page_data = {
                 title:"Services - Empower Ability Labs",
@@ -63,7 +90,7 @@ function knowledgeRunner() {
             };
 
         }
-        else if (e.target.text == "Schedule a call") {
+        else if (route == "Schedule a call") {
             console.log("link clicked is Schedule a call")
             page_data = {
                 title:"Scehdule a call - Empower Ability Labs",
@@ -78,7 +105,7 @@ function knowledgeRunner() {
         //console.log(e);
         //console.log(e.target.text);
         //console.log(window.location.href)
-        let page_details = get_page_detail(e);
+        let page_details = get_page_detail(e.target.text);
         console.log("Page details")
         console.log(page_details)
 
@@ -89,6 +116,14 @@ function knowledgeRunner() {
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
+        updateURL(page_details.url,page_details.title);
+    });
+
+    
+
+    $(window).on('popstate',function (e){
+        let base = window.location.href;
+        
     });
 
     loadStart();
