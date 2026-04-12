@@ -117,6 +117,8 @@ function knowledgeRunner() {
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
+        console.log("focus: ",heading);
+
         updateURL(page_details.url,page_details.title);
     });
 
@@ -132,6 +134,9 @@ function knowledgeRunner() {
         clearPage();
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
+        heading.focus();
+        console.log("focus: ",heading);
+        console.log("style: ",heading.style);
         heading.focus();
     });
 
