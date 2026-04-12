@@ -49,21 +49,22 @@ function knowledgeRunner() {
     };
 
     function get_route(base){
-
+        if(base.includes("home")){
+            return "home";
+        }
+        else if(base.includes("services")){
+            return "services";
+        }
+        else if(base.includes("schedule")){            
+            return "schedule";
+        }
     }
 
     function updateURL(route,title) {
         let base = window.location.href;
         let newURL = base;
-        if(base.includes("home")){
-            newURL = base.replace("home",route)
-        }
-        else if(base.includes("services")){
-            newURL = base.replace("service",route)
-        }
-        else if(base.includes("schedule")){
-            newURL = base.replace("schedule",route)
-        }
+        let current_route = get_route(base);
+        newURL = base.replace(current_route,route)
         console.log(newURL)
         updateHistory(newURL,title)
     };
@@ -72,7 +73,7 @@ function knowledgeRunner() {
     function get_page_detail(route) {
         console.log(route)
         let page_data;
-        if (route == "Home") {
+        if (route == "Home"|| route == "home") {
             console.log("Link clicked is home")
             page_data = {
                 title:"Empower Ability Labs",
@@ -81,7 +82,7 @@ function knowledgeRunner() {
             };
 
         }
-        else if (route == "Services") {
+        else if (route == "Services"|| route == "services") {
             console.log("link clicked is services")
             page_data = {
                 title:"Services - Empower Ability Labs",
@@ -90,7 +91,7 @@ function knowledgeRunner() {
             };
 
         }
-        else if (route == "Schedule a call") {
+        else if (route == "Schedule a call" || route == "schedule") {
             console.log("link clicked is Schedule a call")
             page_data = {
                 title:"Scehdule a call - Empower Ability Labs",
@@ -122,8 +123,16 @@ function knowledgeRunner() {
     
 
     $(window).on('popstate',function (e){
+        console.log("back or forward")
         let base = window.location.href;
-        
+        let current_route = get_route(base);
+        console.log("route: ",current_route)
+        let page_details = get_page_detail(current_route);
+        console.log("page details: ",page_details)
+        clearPage();
+        loadPage(page_details.template_id);
+        let heading = document.getElementsByTagName("h1")[0];
+        heading.focus();
     });
 
     loadStart();
