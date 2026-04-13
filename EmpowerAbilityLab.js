@@ -6,7 +6,9 @@ function knowledgeRunner() {
         console.log(main)
         console.log(main.firstElementChild)
         // CAN USE THE JQUERY LIKE DEQUE to remove instead 
-        main.removeChild(main.firstElementChild);
+        if (main.firstElementChild) {
+            main.removeChild(main.firstElementChild);
+        }
     }
 
     function loadPage(page_id) {
@@ -29,13 +31,15 @@ function knowledgeRunner() {
         let home_data = get_page_detail("Home");
         console.log("home_data");
         console.log(home_data);
-        let base_url = window.location.href;
-        console.log("base");
-        console.log(base_url);
-        let route = `${base_url}/${home_data.url}`;
-        console.log("Route");
-        console.log(route);
-        updateHistory(route,home_data.title);
+        updateTitle(home_data.title);
+        
+        // For Live Server: use clean URLs like /home
+        let currentPath = window.location.pathname;
+        if (currentPath === '/' || currentPath.endsWith('.html')) {
+            // Replace with clean route URL
+            let newURL = `${window.location.origin}/${home_data.url}`;
+            history.replaceState({}, home_data.title, newURL);
+        }
 
         main.appendChild(start_template.content.cloneNode(true))
     }
@@ -44,29 +48,33 @@ function knowledgeRunner() {
         console.log("Updating history");
         history.pushState({ url: newURL, title: newTitle }, newTitle, newURL);
     };
-    function updateTitle() {
-
+    function updateTitle(newTitle) {
+        console.log("Updating title");
+        document.title = newTitle;
     };
 
     function get_route(base){
-        if(base.includes("home")){
+        // Parse route from URL pathname for Live Server
+        let path = window.location.pathname;
+        if (path === '/home' || path.endsWith('/home')) {
             return "home";
         }
-        else if(base.includes("services")){
+        else if (path === '/services' || path.endsWith('/services')) {
             return "services";
         }
-        else if(base.includes("schedule")){            
+        else if (path === '/schedule' || path.endsWith('/schedule')) {
             return "schedule";
         }
+        return "home"; // Default
     }
 
     function updateURL(route,title) {
-        let base = window.location.href;
-        let newURL = base;
-        let current_route = get_route(base);
-        newURL = base.replace(current_route,route)
-        console.log(newURL)
-        updateHistory(newURL,title)
+        updateTitle(title);
+        
+        // For Live Server: create clean URLs like /home, /services
+        let newURL = `${window.location.origin}/${route}`;
+        console.log("Updating URL to:", newURL);
+        updateHistory(newURL, title);
     };
 
 
@@ -94,7 +102,7 @@ function knowledgeRunner() {
         else if (route == "Schedule a call" || route == "schedule") {
             console.log("link clicked is Schedule a call")
             page_data = {
-                title:"Scehdule a call - Empower Ability Labs",
+                title:"Schedule a call - Empower Ability Labs",
                 url:"schedule",
                 template_id:"schedule-template"
             };
@@ -137,10 +145,24 @@ function knowledgeRunner() {
         heading.focus();
         console.log("focus: ",heading);
         console.log("style: ",heading.style);
-        heading.focus();
     });
 
     loadStart();
+    
+    // Handle direct navigation to routes (e.g., /services)
+    $(document).ready(function() {
+        let currentPath = window.location.pathname;
+        if (currentPath !== '/' && !currentPath.endsWith('.html')) {
+            let current_route = get_route(window.location.href);
+            let page_details = get_page_detail(current_route);
+            if (page_details && current_route !== 'home') {
+                console.log("Loading route from URL:", current_route);
+                updateTitle(page_details.title);
+                clearPage();
+                loadPage(page_details.template_id);
+            }
+        }
+    });
 }
 
 /*
