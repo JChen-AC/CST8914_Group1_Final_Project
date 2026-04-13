@@ -28,11 +28,11 @@ function knowledgeRunner() {
         console.log(start_template)
         console.log("main: ")
         console.log(main)
-        let temp =window.location.href
+        let base_url =window.location.href
 
-        if(temp.includes("home") || temp.includes("services") || temp.includes("schedule")){
+        if(base_url.includes("home") || base_url.includes("services") || base_url.includes("schedule")){
             console.log("Refresh")
-            let old_route = get_route(temp);
+            let old_route = get_route(base_url);
             console.log("old route: ",old_route)
             let page_details = get_page_detail(old_route)
             loadPage(page_details.template_id);
@@ -107,7 +107,12 @@ function knowledgeRunner() {
             newURL = base.replace(current_route,route)
         }
         else{
-            newURL = `${base}/${route}`            
+            if (base.endsWith('/')){
+               newURL = `${base}${home_data.url}`;
+            }
+            else{
+                newURL = `${base}/${home_data.url}`;
+            }           
         }
         console.log("Updating URL to:", newURL);
         updateHistory(newURL, title);
