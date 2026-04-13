@@ -35,12 +35,12 @@ function knowledgeRunner() {
         let route = `${base_url}/${home_data.url}`;
         console.log("Route");
         console.log(route);
-        updateHistory(route,home_data.title);
+        updateHistory(route, home_data.title);
 
         main.appendChild(start_template.content.cloneNode(true))
     }
 
-    function updateHistory(newURL,newTitle) {   
+    function updateHistory(newURL, newTitle) {
         console.log("Updating history");
         history.pushState({ url: newURL, title: newTitle }, newTitle, newURL);
     };
@@ -48,55 +48,55 @@ function knowledgeRunner() {
 
     };
 
-    function get_route(base){
-        if(base.includes("home")){
+    function get_route(base) {
+        if (base.includes("home")) {
             return "home";
         }
-        else if(base.includes("services")){
+        else if (base.includes("services")) {
             return "services";
         }
-        else if(base.includes("schedule")){            
+        else if (base.includes("schedule")) {
             return "schedule";
         }
     }
 
-    function updateURL(route,title) {
+    function updateURL(route, title) {
         let base = window.location.href;
         let newURL = base;
         let current_route = get_route(base);
-        newURL = base.replace(current_route,route)
+        newURL = base.replace(current_route, route)
         console.log(newURL)
-        updateHistory(newURL,title)
+        updateHistory(newURL, title)
     };
 
 
     function get_page_detail(route) {
         console.log(route)
         let page_data;
-        if (route == "Home"|| route == "home") {
+        if (route == "Home" || route == "home") {
             console.log("Link clicked is home")
             page_data = {
-                title:"Empower Ability Labs",
-                url:"home",
-                template_id:"main-template"
+                title: "Empower Ability Labs",
+                url: "home",
+                template_id: "main-template"
             };
 
         }
-        else if (route == "Services"|| route == "services") {
+        else if (route == "Services" || route == "services") {
             console.log("link clicked is services")
             page_data = {
-                title:"Services - Empower Ability Labs",
-                url:"services",
-                template_id:"service-template"
+                title: "Services - Empower Ability Labs",
+                url: "services",
+                template_id: "service-template"
             };
 
         }
         else if (route == "Schedule a call" || route == "schedule") {
             console.log("link clicked is Schedule a call")
             page_data = {
-                title:"Scehdule a call - Empower Ability Labs",
-                url:"schedule",
-                template_id:"schedule-template"
+                title: "Scehdule a call - Empower Ability Labs",
+                url: "schedule",
+                template_id: "schedule-template"
             };
         }
         return page_data
@@ -117,26 +117,26 @@ function knowledgeRunner() {
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
-        console.log("focus: ",heading);
+        console.log("focus: ", heading);
 
-        updateURL(page_details.url,page_details.title);
+        updateURL(page_details.url, page_details.title);
     });
 
-    
 
-    $(window).on('popstate',function (e){
+
+    $(window).on('popstate', function (e) {
         console.log("back or forward")
         let base = window.location.href;
         let current_route = get_route(base);
-        console.log("route: ",current_route)
+        console.log("route: ", current_route)
         let page_details = get_page_detail(current_route);
-        console.log("page details: ",page_details)
+        console.log("page details: ", page_details)
         clearPage();
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
-        console.log("focus: ",heading);
-        console.log("style: ",heading.style);
+        console.log("focus: ", heading);
+        console.log("style: ", heading.style);
         heading.focus();
     });
 
@@ -155,3 +155,68 @@ What might not be needed
 
 */
 knowledgeRunner()
+
+let activeModalTrigger = null;
+
+function openDialog(dialogId, triggerElement) {
+    const dialog = document.getElementById(dialogId);
+
+    if (!dialog) {
+        return;
+    }
+
+    activeModalTrigger = triggerElement || null;
+    dialog.hidden = false;
+    dialog.classList.add('is-open');
+    dialog.setAttribute('aria-hidden', 'false');
+
+    const closeButton = dialog.querySelector('.community-modal__close');
+    const focusTarget = closeButton || dialog.querySelector('.community-modal__panel');
+
+    if (focusTarget) {
+        focusTarget.focus();
+    }
+}
+
+function closeDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+
+    if (!dialog) {
+        return;
+    }
+
+    dialog.classList.remove('is-open');
+    dialog.setAttribute('aria-hidden', 'true');
+    dialog.hidden = true;
+
+    if (activeModalTrigger) {
+        activeModalTrigger.focus();
+        activeModalTrigger = null;
+    }
+}
+
+document.addEventListener('click', (event) => {
+    const closeTarget = event.target.closest('[data-modal-close]');
+
+    if (!closeTarget) {
+        return;
+    }
+
+    const modal = closeTarget.closest('.community-modal');
+
+    if (modal) {
+        closeDialog(modal.id);
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+        return;
+    }
+
+    const openModal = document.querySelector('.community-modal.is-open');
+
+    if (openModal) {
+        closeDialog(openModal.id);
+    }
+});

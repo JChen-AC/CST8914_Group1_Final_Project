@@ -1,5 +1,6 @@
 .site-header {
-  background-color: #f7f7f4; /* off-white */
+  background-color: #f7f7f4;
+  /* off-white */
 }
 
 .site-header .nav-link {
@@ -17,6 +18,55 @@
 body {
   padding-top: 70px;
   font-family: "Lato", sans-serif;
+}
+
+.community-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.community-modal.is-open {
+  display: flex;
+}
+
+.community-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.community-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(90vw, 32rem);
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.25rem 1.25rem;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.25);
+}
+
+.community-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #333;
+}
+
+.community-modal__close:focus,
+.community-modal__close:hover {
+  color: #000;
+}
+
+.community-modal__panel:focus {
+  outline: none;
 }
 
 .navbar {
