@@ -273,7 +273,7 @@ function load_webform_javascript() {
              aria-label="Submission Errors" 
              style="outline: none;">
             
-            <div style="font-weight: bold; font-size: 1.25rem; margin-bottom: 0.5rem;" aria-hidden="true">
+            <div style="font-weight: bold; font-size: 1.25rem; margin-bottom: 0.5rem;">
                 Submission Errors:
             </div>
             
