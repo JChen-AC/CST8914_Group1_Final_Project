@@ -384,6 +384,7 @@ function openDialog(dialogId, triggerElement) {
     if (focusTarget) {
         focusTarget.focus();
     }
+    trapFocus(dialog);
 }
 
 function closeDialog(dialogId) {
@@ -401,6 +402,28 @@ function closeDialog(dialogId) {
         activeModalTrigger.focus();
         activeModalTrigger = null;
     }
+}
+
+function trapFocus(element) {
+    const focusableElements = element.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    element.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') {
+            if (event.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    event.preventDefault();
+                    lastElement.focus();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    event.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        }
+    });
 }
 
 document.addEventListener('click', (event) => {
