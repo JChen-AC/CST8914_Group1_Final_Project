@@ -44,6 +44,7 @@ function knowledgeRunner() {
             console.log("old route: ",old_route)
             let page_details = get_page_detail(old_route)
             loadPage(page_details.template_id);
+            history.replaceState({}, page_details.title, base_url);
             return
         }
 
