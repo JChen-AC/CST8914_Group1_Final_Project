@@ -175,6 +175,14 @@ function knowledgeRunner() {
         }
     });
 
+    $(document).on('click', 'a.skiplink', function (e) {
+        e.preventDefault();
+        console.log("Skipping content")
+        let heading = document.getElementsByTagName("h1")[0];
+        heading.focus();
+        console.log("focus: ", heading);
+    });
+
 
 
     $(window).on('popstate', function (e) {
