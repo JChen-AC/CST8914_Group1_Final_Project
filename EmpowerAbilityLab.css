@@ -108,7 +108,10 @@ a {
 
 .community-modal__close:focus,
 .community-modal__close:hover {
-  color: #000;
+  color: #0b5ed7;
+  outline-style: solid;
+  outline-color: #0b5ed7;
+  outline-width: 2px;
 }
 
 .community-modal__panel:focus {
