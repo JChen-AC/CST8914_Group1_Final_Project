@@ -156,6 +156,7 @@ What might not be needed
 */
 knowledgeRunner()
 
+// Modal code
 let activeModalTrigger = null;
 
 function openDialog(dialogId, triggerElement) {

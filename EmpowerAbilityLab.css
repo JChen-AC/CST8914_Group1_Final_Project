@@ -20,6 +20,27 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+.hero-modal-trigger {
+  background-color: #0b5ed7;
+  color: #ffffff;
+  border: 0;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 0.8rem 1.25rem;
+}
+
+.hero-modal-trigger:hover,
+.hero-modal-trigger:focus {
+  background-color: #094bb0;
+  color: #ffffff;
+}
+
+.hero-modal-trigger:focus {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
 .community-modal {
   position: fixed;
   inset: 0;
