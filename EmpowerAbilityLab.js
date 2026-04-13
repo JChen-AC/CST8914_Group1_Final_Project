@@ -44,7 +44,7 @@ function knowledgeRunner() {
         main.appendChild(start_template.content.cloneNode(true))
     }
 
-    function updateHistory(newURL,newTitle) {   
+    function updateHistory(newURL, newTitle) {
         console.log("Updating history");
         history.pushState({ url: newURL, title: newTitle }, newTitle, newURL);
     };
@@ -81,21 +81,21 @@ function knowledgeRunner() {
     function get_page_detail(route) {
         console.log(route)
         let page_data;
-        if (route == "Home"|| route == "home") {
+        if (route == "Home" || route == "home") {
             console.log("Link clicked is home")
             page_data = {
-                title:"Empower Ability Labs",
-                url:"home",
-                template_id:"main-template"
+                title: "Empower Ability Labs",
+                url: "home",
+                template_id: "main-template"
             };
 
         }
-        else if (route == "Services"|| route == "services") {
+        else if (route == "Services" || route == "services") {
             console.log("link clicked is services")
             page_data = {
-                title:"Services - Empower Ability Labs",
-                url:"services",
-                template_id:"service-template"
+                title: "Services - Empower Ability Labs",
+                url: "services",
+                template_id: "service-template"
             };
 
         }
@@ -125,26 +125,27 @@ function knowledgeRunner() {
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
-        console.log("focus: ",heading);
+        console.log("focus: ", heading);
 
-        updateURL(page_details.url,page_details.title);
+        updateURL(page_details.url, page_details.title);
     });
 
-    
 
-    $(window).on('popstate',function (e){
+
+    $(window).on('popstate', function (e) {
         console.log("back or forward")
         let base = window.location.href;
         let current_route = get_route(base);
-        console.log("route: ",current_route)
+        console.log("route: ", current_route)
         let page_details = get_page_detail(current_route);
-        console.log("page details: ",page_details)
+        console.log("page details: ", page_details)
         clearPage();
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
-        console.log("focus: ",heading);
-        console.log("style: ",heading.style);
+        updateURL(page_details.url, page_details.title);
+        console.log("focus: ", heading);
+        console.log("style: ", heading.style);
     });
 
     loadStart();
@@ -177,3 +178,125 @@ What might not be needed
 
 */
 knowledgeRunner()
+
+function setupMobileHeaderMenu() {
+    const toggler = document.querySelector('.navbar-toggler');
+    const nav = document.getElementById('mainNav');
+
+    if (!toggler || !nav) {
+        return;
+    }
+
+    const closeMenu = () => {
+        nav.classList.remove('show');
+        toggler.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+        nav.classList.add('show');
+        toggler.setAttribute('aria-expanded', 'true');
+    };
+
+    toggler.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('show');
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    nav.addEventListener('click', (event) => {
+        if (event.target.closest('a.nav-link') && window.innerWidth < 768) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (window.innerWidth >= 768) {
+            return;
+        }
+
+        const clickedInsideNav = nav.contains(event.target);
+        const clickedToggler = toggler.contains(event.target);
+
+        if (!clickedInsideNav && !clickedToggler) {
+            closeMenu();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            closeMenu();
+        }
+    });
+}
+
+setupMobileHeaderMenu();
+
+// Modal code
+let activeModalTrigger = null;
+
+function openDialog(dialogId, triggerElement) {
+    const dialog = document.getElementById(dialogId);
+
+    if (!dialog) {
+        return;
+    }
+
+    activeModalTrigger = triggerElement || null;
+    dialog.hidden = false;
+    dialog.classList.add('is-open');
+    dialog.setAttribute('aria-hidden', 'false');
+
+    const closeButton = dialog.querySelector('.community-modal__close');
+    const focusTarget = closeButton || dialog.querySelector('.community-modal__panel');
+
+    if (focusTarget) {
+        focusTarget.focus();
+    }
+}
+
+function closeDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+
+    if (!dialog) {
+        return;
+    }
+
+    dialog.classList.remove('is-open');
+    dialog.setAttribute('aria-hidden', 'true');
+    dialog.hidden = true;
+
+    if (activeModalTrigger) {
+        activeModalTrigger.focus();
+        activeModalTrigger = null;
+    }
+}
+
+document.addEventListener('click', (event) => {
+    const closeTarget = event.target.closest('[data-modal-close]');
+
+    if (!closeTarget) {
+        return;
+    }
+
+    const modal = closeTarget.closest('.community-modal');
+
+    if (modal) {
+        closeDialog(modal.id);
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+        return;
+    }
+
+    const openModal = document.querySelector('.community-modal.is-open');
+
+    if (openModal) {
+        closeDialog(openModal.id);
+    }
+});
