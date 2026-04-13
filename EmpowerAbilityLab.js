@@ -108,10 +108,10 @@ function knowledgeRunner() {
         }
         else{
             if (base.endsWith('/')){
-               newURL = `${base}${home_data.url}`;
+               newURL = `${base}${route}`;
             }
             else{
-                newURL = `${base}/${home_data.url}`;
+                newURL = `${base}/${route}`;
             }           
         }
         console.log("Updating URL to:", newURL);
