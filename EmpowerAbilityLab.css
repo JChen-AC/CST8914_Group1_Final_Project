@@ -41,6 +41,9 @@ body {
   padding-top: 70px;
   font-family: "Lato", sans-serif;
 }
+a {
+  color: #0071EB;
+}
 
 .hero-modal-trigger {
   background-color: #0b5ed7;
