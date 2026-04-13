@@ -37,7 +37,7 @@ function knowledgeRunner() {
         let currentPath = window.location.pathname;
         if (currentPath === '/' || currentPath.endsWith('.html')) {
             // Replace with clean route URL
-            let newURL = `${window.location.origin}/${home_data.url}`;
+            let newURL = `${window.location.href}/${home_data.url}`;
             history.replaceState({}, home_data.title, newURL);
         }
 
@@ -55,7 +55,8 @@ function knowledgeRunner() {
 
     function get_route(base){
         // Parse route from URL pathname for Live Server
-        let path = window.location.pathname;
+        //let path = window.location.pathname;
+        let path = base;
         if (path === '/home' || path.endsWith('/home')) {
             return "home";
         }
@@ -72,7 +73,10 @@ function knowledgeRunner() {
         updateTitle(title);
         
         // For Live Server: create clean URLs like /home, /services
-        let newURL = `${window.location.origin}/${route}`;
+        let base = window.location.href;
+        let newURL = base;
+        let current_route = get_route(base);
+        newURL = base.replace(current_route,route)
         console.log("Updating URL to:", newURL);
         updateHistory(newURL, title);
     };
