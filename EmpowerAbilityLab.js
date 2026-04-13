@@ -28,10 +28,24 @@ function knowledgeRunner() {
         console.log(start_template)
         console.log("main: ")
         console.log(main)
+        let temp =window.location.href
+
+        if(temp.includes("home") || temp.includes("services") || temp.includes("schedule")){
+            console.log("Refresh")
+            let old_route = get_route(temp);
+            console.log("old route: ",old_route)
+            let page_details = get_page_detail(old_route)
+            loadPage(page_details.template_id);
+            return
+        }
+
         let home_data = get_page_detail("Home");
         console.log("home_data");
         console.log(home_data);
         updateTitle(home_data.title);
+        main.appendChild(start_template.content.cloneNode(true))
+        
+        console.log("href: ",window.location.href)
         
         // For Live Server: use clean URLs like /home
         let currentPath = window.location.pathname;
@@ -41,7 +55,7 @@ function knowledgeRunner() {
             history.replaceState({}, home_data.title, newURL);
         }
 
-        main.appendChild(start_template.content.cloneNode(true))
+        
     }
 
     function updateHistory(newURL, newTitle) {
@@ -150,7 +164,7 @@ function knowledgeRunner() {
         loadPage(page_details.template_id);
         let heading = document.getElementsByTagName("h1")[0];
         heading.focus();
-        updateURL(page_details.url, page_details.title);
+        //updateURL(page_details.url, page_details.title);
         console.log("focus: ", heading);
         console.log("style: ", heading.style);
         if(page_details.url === "schedule"){
