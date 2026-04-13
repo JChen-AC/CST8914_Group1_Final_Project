@@ -156,6 +156,62 @@ What might not be needed
 */
 knowledgeRunner()
 
+function setupMobileHeaderMenu() {
+    const toggler = document.querySelector('.navbar-toggler');
+    const nav = document.getElementById('mainNav');
+
+    if (!toggler || !nav) {
+        return;
+    }
+
+    const closeMenu = () => {
+        nav.classList.remove('show');
+        toggler.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+        nav.classList.add('show');
+        toggler.setAttribute('aria-expanded', 'true');
+    };
+
+    toggler.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('show');
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    nav.addEventListener('click', (event) => {
+        if (event.target.closest('a.nav-link') && window.innerWidth < 768) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (window.innerWidth >= 768) {
+            return;
+        }
+
+        const clickedInsideNav = nav.contains(event.target);
+        const clickedToggler = toggler.contains(event.target);
+
+        if (!clickedInsideNav && !clickedToggler) {
+            closeMenu();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            closeMenu();
+        }
+    });
+}
+
+setupMobileHeaderMenu();
+
 // Modal code
 let activeModalTrigger = null;
 
