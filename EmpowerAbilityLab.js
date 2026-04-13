@@ -236,7 +236,10 @@ function knowledgeRunner() {
         sessionStorage.setItem("currentURL",window.location.href);
         console.log("Stored url: ",sessionStorage.getItem("currentURL"));
         console.log(originalURL)
-        history.replaceState(originalURL);
+        sessionStorage.setItem("debug1","Fixing url for refresh");
+        sessionStorage.setItem("debug2",originalURL);
+        sessionStorage.setItem("debug3",sessionStorage.getItem("currentURL"));
+        history.replaceState(null,'',originalURL);
     });
 }
 
