@@ -233,3 +233,27 @@ input:focus + .slider {
 footer.container {
   margin-top: 2rem;
 }
+
+a.skiplink {
+  position: absolute;
+  top: -100%;
+  left:50%;  
+  transform: translateX(-50%);
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+
+}
+
+a.skiplink:focus{
+  top:0; 
+  color:white;
+  background-color: #007bff;
+    z-index: 9999;
+
+}
+
+h1:focus{ 
+  border: 2px solid #000000;
+  padding: 10px;
+
+}
