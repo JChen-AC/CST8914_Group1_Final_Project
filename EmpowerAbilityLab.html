@@ -193,6 +193,89 @@
       </div>
     </div>
   </template>
+  <template id="schedule-template">
+    <div>
+      <div class="jumbotron">
+            <div class="container">
+                <!--- UNKNOWN WHAT THE ACTUAL h1 IS AND THIS NEEDS TO BE FORMATED -->
+                <h1 class="h2">Schedule a call</h1>
+                <p>
+                    At Empower Ability Labs, we are dedicated to cultivating empathy and driving positive change through
+                    immersive experiences. Fill out the form below and we’ll get back to you as soon as we can to
+                    schedule a call with our sales team!
+                </p>
+                <!-- IMAGE NEEDS TO BE FORMATTED SO TEXT AND IMAGE IN SAME LINE -->
+                <!-- NEEDS TO DOUBLE CHECK IMAGE TYPE-->
+                <img src="./images/scheduleacall.png" alt="">
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <form id="scheduleCallForm" novalidate>
+                <div class="form-group">
+                    <label for="businessName">Business name</label>
+                    <input type="text" class="form-control col-md-6" id="businessName" name="businessName">
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">Phone number</label>
+                    <small id="phoneHelp" class="form-text text-muted">Format: 613-123-1234</small>
+                    <input type="tel" class="form-control col-md-6" id="phoneNumber" name="phoneNumber"
+                        aria-describedby="phoneHelp">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (required)</label>
+                    <input type="email" class="form-control col-md-6" id="email" name="email" required
+                        aria-required="true">
+                    <div id="emailError" class="invalid-feedback">Please provide a valid email address.</div>
+                </div>
+
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2 h6">What would you like to talk about</legend>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="check1" name="topic" value="awareness">
+                        <label class="form-check-label" for="check1">Awareness lab days and workshops</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="check2" name="topic" value="speaker"
+                            aria-controls="eventDetailsGroup" aria-expanded="false">
+                        <label class="form-check-label" for="check2">Invite a speaker with disabilities to your
+                            event</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="check3" name="topic" value="usability">
+                        <label class="form-check-label" for="check3">Usability testing</label>
+                    </div>
+                </fieldset>
+
+                <div class="form-group" id="eventDetailsGroup" style="display: none;">
+                    <label for="eventDetails">Please tell us about your event</label>
+                    <textarea class="form-control" id="eventDetails" name="eventDetails" rows="3"></textarea>
+
+                </div>
+
+
+                <div class="form-group mb-4">
+                    <div class="d-flex align-items-center">
+                        <span id="switchLabel" class="mr-3">Receive emails about updates and services</span>
+
+                        <label class="custom-toggle">
+                            <input type="checkbox" id="emailUpdates" name="emailUpdates" aria-labelledby="switchLabel"
+                                role="switch">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-dark shadow-sm">Schedule a call</button>
+
+                <div id="form-notification" role="status" aria-live="polite" class="mt-3">
+                </div>
+            </form>
+        </div>
+    </div>
+  </template>
 
   <footer class="container">
     <p>© Copyright Empower Ability Labs Inc 2023. All rights reserved.</p>

@@ -128,6 +128,9 @@ function knowledgeRunner() {
         console.log("focus: ", heading);
 
         updateURL(page_details.url, page_details.title);
+        if(page_details.url === "schedule"){
+            load_webform_javascript() 
+        }
     });
 
 
@@ -146,6 +149,9 @@ function knowledgeRunner() {
         updateURL(page_details.url, page_details.title);
         console.log("focus: ", heading);
         console.log("style: ", heading.style);
+        if(page_details.url === "schedule"){
+            load_webform_javascript() 
+        }
     });
 
     loadStart();
@@ -161,11 +167,73 @@ function knowledgeRunner() {
                 updateTitle(page_details.title);
                 clearPage();
                 loadPage(page_details.template_id);
+                if(page_details.url === "schedule"){
+                    load_webform_javascript() 
+                }
             }
         }
     });
 }
 
+function load_webform_javascript() {
+    console.log("DOMContentLoaded")
+    const form = document.getElementById('scheduleCallForm');
+    const notificationArea = document.getElementById('form-notification');
+    const emailInput = document.getElementById('email');
+    const speakerCheckbox = document.getElementById('check2');
+    const eventDetailsGroup = document.getElementById('eventDetailsGroup');
+    const eventDetailsInput = document.getElementById('eventDetails');
+
+    // 1. Toggle Logic for "Invite a Speaker" 
+    speakerCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            
+            eventDetailsGroup.style.display = 'block';
+            this.setAttribute('aria-expanded', 'true');
+            eventDetailsInput.setAttribute('required', 'required');
+            eventDetailsInput.setAttribute('aria-required', 'true');
+        } else {
+            
+            eventDetailsGroup.style.display = 'none';
+            this.setAttribute('aria-expanded', 'false');
+            eventDetailsInput.removeAttribute('required');
+            eventDetailsInput.removeAttribute('aria-required');
+            eventDetailsInput.value = ''; 
+        }
+    });
+
+    // 2. Form Submission Logic 
+    form.addEventListener('submit', function (event) {
+        console.log("Submitting thing")
+        event.preventDefault(); 
+
+        
+        notificationArea.innerHTML = '';
+        emailInput.classList.remove('is-invalid');
+        console.log("Validation")
+        // Validation Check
+        if (!emailInput.value || !emailInput.checkValidity()) {
+            console.log("Error")
+            // Error State
+            emailInput.classList.add('is-invalid');
+            
+            
+            notificationArea.innerHTML = '<div class="alert alert-danger" role="alert">Error: Please provide a valid email address.</div>';
+            
+            // Jump to the error for keyboard users
+            emailInput.focus(); 
+        } else {
+            console.log("Success")
+            // Success State
+            notificationArea.innerHTML = '<div class="alert alert-success">Thank you! Your request has been submitted. Our sales team will contact you soon.</div>';
+            
+            // Complete Reset
+            form.reset();
+            eventDetailsGroup.style.display = 'none';
+            speakerCheckbox.setAttribute('aria-expanded', 'false');
+        }
+    });
+};
 /*
 What might not be needed
 - add aria live to show that the section has been updated
