@@ -1,7 +1,6 @@
 //Template Function that can be used to run JavaScript on the page
 //Note: This can be changed to whatever JavaScript formatting you would like
 function knowledgeRunner() {
-    const originalURL = window.location.href;
     function clearPage() {
         const main = document.getElementById("main-content");
         console.log(main)
@@ -30,13 +29,6 @@ function knowledgeRunner() {
         console.log("main: ")
         console.log(main)
         let base_url =window.location.href
-        let stored_url = sessionStorage.getItem("currentURL");
-        if(stored_url){
-            base_url = stored_url;
-            sessionStorage.removeItem("currentURL");
-
-        }
-
 
         if(base_url.includes("home") || base_url.includes("services") || base_url.includes("schedule")){
             console.log("Refresh")
@@ -231,13 +223,6 @@ function knowledgeRunner() {
                 }
             }
         }
-    });
-    window.addEventListener('beforeunload',()=>{
-        console.log("Fixing url for refresh");
-        sessionStorage.setItem("currentURL",window.location.href);
-        console.log("Stored url: ",sessionStorage.getItem("currentURL"));
-        console.log(originalURL)
-        history.replaceState(originalURL);
     });
 }
 
@@ -489,5 +474,3 @@ document.addEventListener('keydown', (event) => {
         closeDialog(openModal.id);
     }
 });
-
-
