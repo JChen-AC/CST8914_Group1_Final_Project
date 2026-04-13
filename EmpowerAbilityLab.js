@@ -53,7 +53,16 @@ function knowledgeRunner() {
         let currentPath = window.location.pathname;
         if (currentPath === '/' || currentPath.endsWith('.html')) {
             // Replace with clean route URL
-            let newURL = `${window.location.href}/${home_data.url}`;
+            
+            let base = window.location.href;
+            let newURL = base;
+            if (base.endsWith('/')){
+               newURL = `${base}${home_data.url}`;
+            }
+            else{
+                newURL = `${base}/${home_data.url}`;
+            }
+            
             history.replaceState({}, home_data.title, newURL);
         }
 
