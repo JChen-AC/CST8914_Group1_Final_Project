@@ -39,6 +39,8 @@ function knowledgeRunner() {
             return
         }
 
+        console.log("First start")
+
         let home_data = get_page_detail("Home");
         console.log("home_data");
         console.log(home_data);
@@ -80,7 +82,7 @@ function knowledgeRunner() {
         else if (path === '/schedule' || path.endsWith('/schedule')) {
             return "schedule";
         }
-        return "home"; // Default
+        return "NONE"; // Default
     }
 
     function updateURL(route,title) {
@@ -90,9 +92,17 @@ function knowledgeRunner() {
         let base = window.location.href;
         let newURL = base;
         let current_route = get_route(base);
-        newURL = base.replace(current_route,route)
+        console.log("cur route: ",current_route)
+        console.log("new route: ",route);
+        if(current_route !== "NONE"){
+            newURL = base.replace(current_route,route)
+        }
+        else{
+            newURL = `${base}/${route}`            
+        }
         console.log("Updating URL to:", newURL);
         updateHistory(newURL, title);
+        
     };
 
 
